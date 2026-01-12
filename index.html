@@ -1,11 +1,62 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>My Page</title>
-</head>
-<body>
-  <h1>GitHub Pages 動作確認</h1>
-  <p>表示できました！</p>
-</body>
-</html>
+
+{% extends "base.html" %}
+{% block content %}
+
+<form method="get">
+<input name="keyword" placeholder="検索" value="{{ keyword }}">
+<input type="date" name="start_date" value="{{ start_date }}">
+  〜
+  <input type="date" name="end_date" value="{{ end_date }}">
+
+<select name="lecture_id">
+<option value="">全講義</option>
+{% for l in lectures %}
+<option value="{{ l.id }}">{{ l.name }}</option>
+{% endfor %}
+</select>
+<button>検索</button>
+</form>
+
+<h2>➕ 追加</h2>
+<form method="post" action="/add">
+<select name="lecture_id" required>
+{% for l in lectures %}
+<option value="{{ l.id }}">{{ l.name }}</option>
+{% endfor %}
+</select>
+<input type="date" name="date">
+<input name="content" placeholder="内容" required>
+<button>追加</button>
+</form>
+
+<hr>
+
+{% for n in notes %}
+<div class="note">
+
+  <!-- 重要フラグ切り替え -->
+  <a href="{{ url_for('toggle_important', note_id=n.id) }}">
+    {{ "⭐" if n.important else "☆" }}
+  </a>
+
+  <b>{{ n.note_date }}</b>
+  {{ n.name }}
+
+  <!-- 詳細ページ -->
+  <a href="{{ url_for('note_detail', note_id=n.id) }}">
+    {{ n.content }}
+  </a>
+
+  <!-- 削除（POST） -->
+  <form method="post"
+        action="{{ url_for('delete_note', note_id=n.id) }}"
+        onsubmit="return confirm('削除しますか？')"
+        style="display:inline">
+
+    <button type="submit">🗑 削除</button>
+  </form>
+
+</div>
+{% endfor %}
+
+{% endblock %}
