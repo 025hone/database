@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>📚 講義追加</h2>
+
+<form method="post" action="{{ url_for('add_lecture') }}">
+    <input type="text" name="name" placeholder="講義名" required>
+    <button type="submit">追加</button>
+</form>
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>講義ノート</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>📘 講義ノート管理</h1>
+<nav>
+<a href="/">一覧</a> |
+<a href="/add_lecture">講義追加</a> |
+
+</nav>
+<hr>
+{% block content %}{% endblock %}
+</body>
+</html>
