@@ -111,7 +111,7 @@ def index():
     )
 
 # --------------------
-# ノート追加（index.html 用）
+# ノート追加
 # --------------------
 @app.route("/add", methods=["POST"])
 def add_note():
@@ -234,3 +234,4 @@ def toggle_important(note_id):
 # --------------------
 if __name__ == "__main__":
     app.run(debug=True)
+
